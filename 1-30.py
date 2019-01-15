@@ -1,0 +1,10 @@
+a = [1.0, 2.0, 3.0]
+print('a =', a)
+b = a
+b[0] = 0.5
+print('b = ', b)
+print('a =', a)
+c = a[:]
+c[0] = 7.0
+print('c = ', c)
+print('a = ', a)

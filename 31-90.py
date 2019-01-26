@@ -1,5 +1,29 @@
 import numpy as np
+from numpy.linalg import inv, solve
+import matplotlib as plt
 
+'''
+x = np.arange(0.0, 6.2, 0.1)
+plt.pyplot.plot(x, np.sin(x), 'o-', x, np.cos(x), '^-', markersize=3)
+plt.pyplot.xlabel('x')
+plt.pyplot.legend(('sine', 'cosine'), loc=0)
+plt.pyplot.savefig('testplot', format='tiff')
+plt.pyplot.show()
+'''
+
+
+A = np.array([[4.0, -2.0, 1.0],
+           [-2.0, 4.0, -2.0],
+           [1.0, -2.0, 3.0]])
+b = np.array([[1.0, 4.0, 2.0]])
+print(b.T.shape)
+A_inv = inv(A)
+result = solve(A, b.T)
+print(result, '\n')
+print(np.dot(A_inv, b.T))
+print(np.dot(A_inv, A))
+
+'''
 #Vandermode matrix
 def Vandermonde(v):
     n = len(v)
@@ -17,26 +41,6 @@ B = b.copy()
 
 ##Go to ass elimination
 
-'''
-Solves [A]<x|=<b| by Gauss elimination 
-'''
-'''
-def gaussElimin(a,b):
-    n = len(b)
-# Elimination Phase
-    for k in range(0,n-1):
-        for i in range(k+1,n):
-            if a[i,k] != 0.0:
-                lam = a [i,k]/a[k,k]
-                a[i,k+1:n] = a[i,k+1:n] - lam*a[k,k+1:n]
-                b[i] = b[i] - lam*b[k]
-# Back substitution
-    for k in range(n-1,-1,-1):
-        b[k] = (b[k] - np.dot(a[k,k+1:n],b[k+1:n]))/a[k,k]
-        return b
-
-
-'''
 def gaussElimin(a,b):
     n = len(b)
 # Elimination Phase
@@ -57,13 +61,4 @@ determinant = np.prod(np.diagonal(a))
 print('Y=\n', Y)
 print('\ndet = ', determinant)
 print('\nCheck result: [a]{Y} - b =\n',np.dot(A,Y) - B)
-
-'''
-A = np.array([[5, 4, 8, 1],
-              [0, 3, 7, -4],
-              [8, 0, 4, -2],
-              [-1, 6, 0, 2]])    
-b = np.array([ [7], [-46], [0], [13]])
-#print(A.shape, '\n', b.shape)
-print(gaussElimin(A,b))
 '''
